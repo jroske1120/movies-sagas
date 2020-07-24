@@ -13,7 +13,8 @@ We'll be able to see movies that exist in our DB. We'll also be able to see deta
 
 1. Create a database named `saga_movies_weekend`
 2. Run the queries from `database.sql` on the `saga_movies_weekend` database.
-3. You will need to create the junction table between the `movies` and `genres` tables!
+3. 
+[]You will need to create the junction table between the `movies` and `genres` tables!
 
 ## Install Dependencies
 
@@ -30,7 +31,7 @@ We've given you some starter genres in the database. Feel free to change or add 
 We've added some movie posters in the `public/images` folder, and the database is set up to use them.
 
 ### Relationships
-Genres can be applied to many different movies. Movies can have multiple genres. This is Many-to-Many! Junction Table time!
+[]Genres can be applied to many different movies. Movies can have multiple genres. This is Many-to-Many! Junction Table time!
 
 ## Feature List
 
