@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 class MovieList extends Component {
     // Renders the entire app on the DOM
@@ -14,22 +15,25 @@ class MovieList extends Component {
 
     handleClick = (event, id) => {
         console.log('in handleClick with id', id);
+        this.props.dispatch({ type: 'FETCH_MOVIES', payload: id});
     }
 
     render() {
         return (
             <div className="App">
+                <Router>
                 <h1>MovieList Page</h1>
                 <ul>
                     {this.props.reduxState.movies.map((item, index) =>
-                        <li key={index}>{item.id}
-                            <img
+                        <li key={index}>
+                            <Link to={`/details/${item.id}`}><img
                                 onClick={(event) =>
                                     this.handleClick(event, item.id)}
-                                src={item.poster} />
+                                src={item.poster} /></Link>
                         </li>
                     )
                     }</ul>
+                    </Router>
             </div>
         );
     }

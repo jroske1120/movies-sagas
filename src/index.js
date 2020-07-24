@@ -17,6 +17,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', getMovieSaga)
+    yield takeEvery('FETCH_ONE', getOneSaga)
 }
 
 // Create sagaMiddleware
@@ -31,6 +32,17 @@ function* getMovieSaga(action) {
         console.log('issue with movie get saga:', error)
     }
 }
+function* getOneSaga(action) {
+    console.log('getOneSaga', action.payload)
+    try {
+        // get request that gets movies from database
+        const response = yield axios.get('/movies/')
+        yield put({ type: 'SET_MOVIES', payload: response.data })
+    } catch (error) {
+        console.log('issue with oneMovie get saga:', error)
+    }
+}
+
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {

@@ -22,14 +22,14 @@ class App extends Component {
             <Link to='/'>Movie List</Link>
             </li>
             <li>
-            <Link to='/details'>Movie details</Link>
+            <Link to='/details/:id'>Movie details</Link>
             </li>
             <li>
             <Link to='/edit'>Edit a Genre</Link>
             </li>
           </nav>
         <Route exact path='/' component={MovieList}/>
-        <Route exact path='/details' component={Details}/>
+        <Route exact path='/details/:id' component={Details}/>
         <Route exact path='/edit' component={Edit}/>
         </Router>
       </div>
