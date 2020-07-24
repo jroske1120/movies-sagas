@@ -13,9 +13,9 @@ class MovieList extends Component {
         this.props.dispatch({ type: 'FETCH_MOVIES' });
     }
 
-    handleClick = (event, id) => {
+    handleClick = (id) => {
         console.log('in handleClick with id', id);
-        this.props.dispatch({ type: 'FETCH_MOVIES', payload: id});
+        this.props.history.push(`/details/${id}`);
     }
 
     render() {
@@ -26,10 +26,10 @@ class MovieList extends Component {
                 <ul>
                     {this.props.reduxState.movies.map((item, index) =>
                         <li key={index}>
-                            <Link to={`/details/${item.id}`}><img
-                                onClick={(event) =>
-                                    this.handleClick(event, item.id)}
-                                src={item.poster} /></Link>
+                            <img
+                                onClick={() =>
+                                    this.handleClick(item.id)}
+                                src={item.poster} />
                         </li>
                     )
                     }</ul>

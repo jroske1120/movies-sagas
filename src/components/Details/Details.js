@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Details extends Component {
-  // Renders the entire app on the DOM
+    // Renders the entire app on the DOM
 
-  //get call to display specific movie that was clicked
-  componentDidMount(){
-      this.getMovieDetails();
-  }
+    //get call to display specific movie that was clicked
+    componentDidMount() {
+        this.getMovieDetails();
+    }
 
-  getMovieDetails(){
-    console.log('in getMovieDetails');
-    //dispatch for one movie
-    this.props.dispatch({type: 'FETCH_ONE', payload: this.props.match.params.id })
-  }
+    getMovieDetails = () => {
+        console.log('in getMovieDetails');
+        //dispatch for one movie
+        this.props.dispatch({ type: 'GET_DETAILS', payload: { id: this.props.match.params.id } })
+    }
 
-  render() {
-    return (
-      <div className="App">
-      <h1>Details Page</h1>
-      {JSON.stringify(this.props.match.params.id)}
-
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <h1>Details Page for {this.props.reduxState.details.title}</h1>
+                <p>{this.props.reduxState.details.description}
+                </p>
+            </div>
+        );
+    }
 }
 const mapReduxStateToProps = (reduxState) => ({
     reduxState
