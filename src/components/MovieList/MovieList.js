@@ -12,14 +12,21 @@ class MovieList extends Component {
         this.props.dispatch({ type: 'FETCH_MOVIES' });
     }
 
+    handleClick = (event, id) => {
+        console.log('in handleClick with id', id);
+    }
+
     render() {
         return (
             <div className="App">
                 <h1>MovieList Page</h1>
                 <ul>
                     {this.props.reduxState.movies.map((item, index) =>
-                        <li key={index}>
-                            <img src={item.poster} />
+                        <li key={index}>{item.id}
+                            <img
+                                onClick={(event) =>
+                                    this.handleClick(event, item.id)}
+                                src={item.poster} />
                         </li>
                     )
                     }</ul>

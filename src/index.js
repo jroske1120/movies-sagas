@@ -11,7 +11,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 
 //Further imports
-import {takeEvery, put} from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
@@ -22,17 +22,16 @@ function* rootSaga() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-function* getMovieSaga(action){
-    // console.log('trying to send:', action.payload)
+function* getMovieSaga(action) {
     try {
-      // get request that gets movies from database
-      const response = yield axios.get('/movies')
-
-      yield put({type:'SET_MOVIES', payload: response.data})
+        // get request that gets movies from database
+        const response = yield axios.get('/movies')
+        yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {
-      console.log('issue with movie get saga:', error)
+        console.log('issue with movie get saga:', error)
     }
-  }
+}
+
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
@@ -66,6 +65,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();
