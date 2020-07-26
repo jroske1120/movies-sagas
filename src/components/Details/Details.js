@@ -22,7 +22,7 @@ class Details extends Component {
                 {/* Conditional rendering for if update reducer is undefined, display
                 what's in details reducer. This way when we return to details
                 after editing, our updates show instead of what's in details */}
-                {this.props.reduxState.update === undefined ?
+                {this.props.reduxState.update.length === 0 ?
                     <div>
                         <h3>
                             Details for

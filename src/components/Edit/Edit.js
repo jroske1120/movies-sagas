@@ -7,8 +7,8 @@ class Edit extends Component {
   state = {
     updatedInfo: {
       id: this.props.reduxState.details.id,
-      title: '',
-      description: ''
+      title: this.props.reduxState.details.title,
+      description: this.props.reduxState.details.description
     }
   }
 
@@ -68,14 +68,14 @@ class Edit extends Component {
           placeholder="Save" />
         </form>
         <h1>
-          New Title:
+          Title:
           <br></br>
           {this.state.updatedInfo.title}
           </h1>
         <img 
         src={this.props.reduxState.details.poster}
         />
-        <h5> New description:
+        <h5> Description:
           <br></br>
           {this.state.updatedInfo.description}
           </h5>
