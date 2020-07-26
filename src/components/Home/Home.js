@@ -10,7 +10,7 @@ class MovieList extends Component {
             <div className="App">
                 <h1>MovieList Page</h1>
 
-                    {this.props.movies.map((movie, i) =>
+                    {this.props.reduxState.movies.map((movie, i) =>
                         <MovieItem key={i}
                         movie={movie}
                              />
@@ -21,7 +21,7 @@ class MovieList extends Component {
     }
 }
 const mapReduxStateToProps = (reduxState) => ({
-    movies: reduxState.movies
+    reduxState
 });
 
 export default connect(mapReduxStateToProps)(MovieList);

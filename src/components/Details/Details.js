@@ -10,29 +10,45 @@ class Details extends Component {
 
     goToEdit = () => {
         this.props.history.push('/edit');
-        this.props.dispatch({type: 'SELECT_DETAILS', payload: {...this.props.movie}})
+        this.props.dispatch({ type: 'SET_DETAILS', payload: { ...this.props.reduxState.details } })
     }
 
-  render () {
-    return (
-      <div>
-        <p className="instructions">Click 'Edit' to change the movie description or title!</p>
-        <h1>Details</h1>
-        <button onClick={this.goBackHome}>Back to Movie List</button>
-        <div>
-            <img src={this.props.movie.poster} alt={this.props.movie.title} onClick={this.goToDetails}/>
-            <p>{this.props.movie.title}</p>
-            <p>Genres: {this.props.movie.genres.join(', ')}</p>
-            <p>{this.props.movie.description}</p>
-            <button onClick={this.goToEdit}>Edit</button>
-        </div>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div>
+                <h3>
+                    Details for
+            </h3>
+                <h1>
+                    {this.props.reduxState.details.title}
+                </h1>
+                <button
+                    onClick={this.goBackHome}>
+                    Back to Movie List
+            </button>
+                <div>
+                    <img
+                        src={this.props.reduxState.details.poster}
+                        alt={this.props.reduxState.details.title}
+                    />
+                    <p>
+                        Genres: {this.props.reduxState.details.genres.join(', ')}
+                    </p>
+                    <p>
+                        {this.props.reduxState.details.description}
+                    </p>
+                    <button
+                        onClick={this.goToEdit}>
+                        Edit details
+                </button>
+                </div>
+            </div>
+        )
+    }
 }
 
 const mapReduxStateToProps = (reduxState) => ({
-    movie: reduxState.movieDetails
+    reduxState
 });
 
 export default connect(mapReduxStateToProps)(Details);

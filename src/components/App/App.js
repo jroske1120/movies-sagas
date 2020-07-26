@@ -20,7 +20,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <Router>
           <Route exact path='/' component={Home} />
           <Route exact path='/details' component={Details} />
