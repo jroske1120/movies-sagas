@@ -14,6 +14,8 @@ class App extends Component {
   // Renders the entire app on the DOM
 
   componentDidMount () {
+    //calls the getMovieSaga which then gets the movie
+    //info with an axios GET call
     this.props.dispatch({type: 'GET_MOVIES'});
   }
 
@@ -24,6 +26,8 @@ class App extends Component {
         <Router>
           <nav>
             <li>
+              {/* Link in nav to always give user the option 
+              to return to the main list of movies */}
             <Link to='/'>Movie List</Link>
             </li>
           </nav>

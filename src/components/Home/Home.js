@@ -9,13 +9,14 @@ class MovieList extends Component {
         return (
             <div className="App">
                 <h1>MovieList Page</h1>
-
-                    {this.props.reduxState.movies.map((movie, i) =>
-                        <MovieItem key={i}
+                {/* maps movies in database and 
+                passes down props to MovieItem */}
+                {this.props.reduxState.movies.map((movie, i) =>
+                    <MovieItem key={i}
                         movie={movie}
-                             />
-                    )
-                    }
+                    />
+                )
+                }
             </div>
         );
     }
