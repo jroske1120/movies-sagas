@@ -1,5 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
+const styles = {
+    card: {
+        width: 350,
+        padding: 10,
+        margin: 10,
+        justifyContent: 'center',
+        backgroundColor: 'silver',
+    },
+    media: {
+        height: 450,
+    },
+};
 
 class Details extends Component {
     // Renders the entire app on the DOM
@@ -17,6 +39,8 @@ class Details extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <div>
                 {/* Conditional rendering for if update reducer is undefined, display
@@ -24,80 +48,97 @@ class Details extends Component {
                 after editing, our updates show instead of what's in details */}
                 {this.props.reduxState.update.length === 0 ?
                     <div>
-                        <h3>
-                            Details for
-            </h3>
-                        <h1>
-                            {this.props.reduxState.details.title}
-                        </h1>
-                        <button
-                            onClick={this.goBackHome}>
-                            Back to Movie List
+                        <Grid
+                            container direction="column"
+                            justify="center"
+                            alignItems="center">
+                            <Card variant="outlined"
+                                className={classes.card} >
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={classes.media}
+                                        component="img"
+                                        image={this.props.reduxState.details.poster}
+                                        alt={this.props.reduxState.details.title}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {this.props.reduxState.details.title}<hr color="black" />
+                                        </Typography>
+                                        <Typography variant="body2" component="p">
+                                            {this.props.reduxState.details.description}<hr />
+                                        </Typography>
+                                        {this.props.reduxState.details.genres === undefined ?
+                                            <Typography></Typography>
+                                            :
+                                            <Typography variant="body2" color="textSecondary" component="p">
+                                                Genres: {this.props.reduxState.details.genres.join(', ')}
+                                            </Typography>}
+                                    </CardContent>
+                                    <button
+                                        onClick={this.goBackHome}>
+                                        Back to Movie List
                          </button>
-                        <div>
-                            <img
-                                src={this.props.reduxState.details.poster}
-                                alt={this.props.reduxState.details.title}
-                            />
-                            {/* conditional rendering to avoid errors from asynchronicity */}
-                            {this.props.reduxState.details.genres === undefined ?
-                                <p></p>
-                                : <p>
-                                    Genres: {this.props.reduxState.details.genres.join(', ')}
-                                </p>}
-
-                            <p>
-                                {this.props.reduxState.details.description}
-                            </p>
-                            <button
-                                onClick={this.goToEdit}>
-                                Edit details
+                                    <button
+                                        onClick={this.goToEdit}>
+                                        Edit details
                             </button>
-                        </div>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
                     </div>
-                    // if returning from the update page, and update reducer has info
-                    //display the following
                     : <div>
-                        <h3>
-                            Details for
-        </h3>
-                        <h1>
-                            {this.props.reduxState.update.title}
-                        </h1>
-                        <button
-                            onClick={this.goBackHome}>
-                            Back to Movie List
-                     </button>
-                        <div>
-                            <img
-                                src={this.props.reduxState.details.poster}
-                                alt={this.props.reduxState.update.title}
-                            />
-                            {/* conditional rendering to avoid errors from asynchronicity */}
+                        <Grid
+                            container direction="column"
+                            justify="center"
+                            alignItems="center">
+                            <Card variant="outlined"
+                                className={classes.card} >
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={classes.media}
+                                        component="img"
+                                        image={this.props.reduxState.details.poster}
+                                        alt={this.props.reduxState.update.title}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {this.props.reduxState.update.title}<hr color="black" />
+                                        </Typography>
+                                        <Typography variant="body2" component="p">
+                                            {this.props.reduxState.update.description}<hr />
+                                        </Typography>
+                                        {this.props.reduxState.details.genres === undefined ?
+                                            <Typography></Typography>
+                                            :
+                                            <Typography variant="body2" color="textSecondary" component="p">
+                                                Genres: {this.props.reduxState.details.genres.join(', ')}
+                                            </Typography>}
+                                    </CardContent>
+                                    <button
+                                        onClick={this.goBackHome}>
+                                        Back to Movie List
+                         </button>
+                                    <button
+                                        onClick={this.goToEdit}>
+                                        Edit details
+                            </button>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
+                    </div>
 
-                            {this.props.reduxState.details.genres === undefined ?
-                                <p></p>
-                                : <p>
-                                    Genres: {this.props.reduxState.details.genres.join(', ')}
-                                </p>}
 
-                            <p>
-                                {this.props.reduxState.update.description}
-                            </p>
-                            <button
-                                onClick={this.goToEdit}>
-                                Edit details
-                        </button>
-                        </div>
-                    </div>}
+                }
             </div>
         )
-    }
-}
+            }}
 
-const mapReduxStateToProps = (reduxState) => ({
-    reduxState
-});
 
-export default connect(mapReduxStateToProps)(Details);
+
+        const mapReduxStateToProps = (reduxState) => ({
+            reduxState
+        });
+
+        export default connect(mapReduxStateToProps)(withStyles(styles)(Details));
 

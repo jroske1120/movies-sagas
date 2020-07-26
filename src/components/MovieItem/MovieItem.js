@@ -13,22 +13,14 @@ import Grid from '@material-ui/core/Grid';
 
 const styles = {
     card: {
-        width: 345,
+        width: 350,
         padding: 10,
         margin: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'silver',
     },
     media: {
-        height: 500,
-    },
-    marginAutoContainer: {
-        width: 500,
-        height: 80,
-        display: 'flex',
-        backgroundColor: 'gold',
-    },
-    marginAutoItem: {
-        margin: 'auto'
+        height: 450,
     },
 };
 
@@ -46,8 +38,9 @@ class MovieItem extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className="make-grid">
-                <Grid container direction="column"
+            <div>
+                <Grid 
+                container direction="column"
                     justify="center"
                     alignItems="center">
                     <Card variant="outlined"
@@ -63,7 +56,7 @@ class MovieItem extends Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {this.props.movie.title}<hr color="black"/>
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
+                                <Typography variant="body2" component="p">
                                     {this.props.movie.description}<hr/>
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">

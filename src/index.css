@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-}
+  background: linear-gradient(270deg, black 10%, white 50%, black 90%);  }
 
 /* .make-grid {
   display: inline-block; 
