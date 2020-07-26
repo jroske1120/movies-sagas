@@ -5,7 +5,7 @@ const pg = require('pg');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    // return all movies
+    // returns all movies with selected info after M-M join
     const queryText =
         `SELECT movies.id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
         FROM movies 
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     console.log(`in put request with req.body= ${req.body}`);
-    // return all movies
+    // edits the db info with edits. If none made, old info remains
     const queryText =
         `UPDATE movies SET title = $2, description = $3 WHERE id = $1;`
         ;

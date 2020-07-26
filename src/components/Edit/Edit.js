@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Fade from 'react-reveal/Fade';
 
 const styles = {
   card: {
@@ -47,54 +48,56 @@ class Edit extends Component {
       updatedInfo: {
         ...this.state.updatedInfo,
         [type]: event.target.value
-      }
-    })
-  }
+      }//end updatedInfo
+    }) //end setState
+  } //end handleChange
 
   handleSubmit = () => {
     console.log(this.state)
+    // adds updatedInfo to update reducer and calls update Saga
     this.props.dispatch({
       type: "ADD_NEW_INFO",
       payload: this.state.updatedInfo
-    })
+    }) //end dispatch
+    //push us to details after dispatch
     this.props.history.push('/details');
-  }
+  } //end handleSubmit
 
   render() {
     const { classes } = this.props;
     return (
+      <Fade top>
       <div className="App">
         <h1>Edit This Movie!</h1>
         <Button
-        variant="contained"
+          variant="contained"
           onClick={this.goBack}>
           Cancel
           </Button>
-
-          <TextField
-            id="filled-basic"
-            label="New Title"
-            variant="filled"
-            multiline
-            rows={4}
-            value={this.state.title}
-            onChange={(event) => this.handleChange(event, "title")} />
-
-          <TextField
-            id="outlined-multiline-static"
-            label="New Description"
-            multiline
-            rows={4}
-            defaultValue={this.state.description}
-            onChange={(event) => this.handleChange(event, "description")}
-            variant="filled"
-          />
-          <Button
+        <TextField
+          id="filled-basic"
+          label="New Title"
+          variant="filled"
+          multiline
+          rows={4}
+          value={this.state.title}
+          onChange={(event) => this.handleChange(event, "title")} />
+        {/* text fields made same for symmetry */}
+        <TextField
+          id="outlined-multiline-static"
+          label="New Description"
+          multiline
+          rows={4}
+          defaultValue={this.state.description}
+          onChange={(event) => this.handleChange(event, "description")}
+          variant="filled"
+        />
+        <Button
           variant="contained"
           onClick={this.handleSubmit}>
           Submit
           </Button>
-
+        {/* center card with Grid, populating with state as user types */}
         <Grid
           container direction="column"
           justify="center"
@@ -114,13 +117,12 @@ class Edit extends Component {
                 <Typography variant="body2" component="p">
                   {this.state.updatedInfo.description}<hr />
                 </Typography>
-
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-
       </div>
+      </Fade>
     );
   }
 }

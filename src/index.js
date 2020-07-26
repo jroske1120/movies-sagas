@@ -16,8 +16,9 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    //click from getMovies in MovieList calls this
+    //click from getMovies in Home component calls this
     yield takeEvery('GET_MOVIES', getMovieSaga)
+    //click from handleSubmit in Edit component calls this 
     yield takeEvery('ADD_NEW_INFO', updateMovieSaga)
 }
 
@@ -38,9 +39,11 @@ function* getMovieSaga(action) {
 function* updateMovieSaga(action) {
     console.log('id coming in', action.payload, action.payload.id);
     try {
-        // get request that gets movies from database
+        // put request that re-gets the selected movie from database
+        //with the changes made by the user
         const response = yield axios.put(`/movies/${action.payload.id}`, action.payload)
         yield put({ type: 'GET_MOVIES', payload: response.data })
+        // GET_MOVIES also recalls getMovieSaga
     } catch (error) {
         console.log('issue with movie get saga:', error)
     }
@@ -56,6 +59,7 @@ const movies = (state = [], action) => {
     }
 }
 
+//Used to store the details of the movie that was clicked
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SET_DETAILS':
@@ -65,6 +69,7 @@ const details = (state = [], action) => {
     }
 }
 
+//Used to store the updates made in the Edit component
 const update = (state = [], action) => {
     switch (action.type) {
         case 'ADD_NEW_INFO':

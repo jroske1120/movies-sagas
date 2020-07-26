@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Fade from 'react-reveal/Fade';
 
 const styles = {
     card: {
@@ -32,9 +33,12 @@ class Details extends Component {
     }
 
     goToEdit = () => {
-        //
-        this.props.dispatch({ type: 'SET_DETAILS', payload: { ...this.props.reduxState.details } })
-        //
+        // calls SET_DETAILS (details reducer) with 
+        //payload of the selected movie's details
+        this.props.dispatch({ 
+            type: 'SET_DETAILS', 
+            payload: { ...this.props.reduxState.details } })
+        //Then pushes history and brings us to the selected movies' edit details
         this.props.history.push('/edit');
     }
 
@@ -42,9 +46,10 @@ class Details extends Component {
         const { classes } = this.props;
 
         return (
+            <Fade right>
             <div>
-                <h1>Edit this Movie!</h1>
-                {/* Conditional rendering for if update reducer is undefined, display
+                <h1>Movie Details!</h1>
+                {/* Conditional rendering for if update reducer is empty, display
                 what's in details reducer. This way when we return to details
                 after editing, our updates show instead of what's in details */}
                 {this.props.reduxState.update.length === 0 ?
@@ -79,6 +84,7 @@ class Details extends Component {
                                         <Typography variant="body2" component="p">
                                             {this.props.reduxState.details.description}<hr />
                                         </Typography>
+                                        {/* Additional conditional to account for genre undefined */}
                                         {this.props.reduxState.details.genres === undefined ?
                                             <Typography></Typography>
                                             :
@@ -91,7 +97,10 @@ class Details extends Component {
                             </Card>
                         </Grid>
                     </div>
-                    : <div>
+                    :
+                    // If returning from the edit page, new details will appear
+                    //via reduxState.update 
+                    <div>
                         <Grid
                             container direction="column"
                             justify="center"
@@ -136,6 +145,7 @@ class Details extends Component {
                     </div>
                 }
             </div>
+            </Fade>
         )
     }
 }
