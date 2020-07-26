@@ -8,7 +8,7 @@ class MovieList extends Component {
     render() {
         return (
             <div>
-                <h1>MovieList Page</h1>
+                <h1>Joel's Movies</h1>
                 {/* maps movies in database and 
                 passes down props to MovieItem */}
                 {this.props.reduxState.movies.map((movie, i) =>
