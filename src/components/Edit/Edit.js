@@ -33,13 +33,13 @@ class Edit extends Component {
       type: "ADD_NEW_INFO",
       payload: this.state.updatedInfo
     })
-    // this.setState({
-    //   updatedInfo: {
-    //     title: '',
-    //     description: ''
-    //   }
-    // })
-    // this.props.history.push('/details');
+    this.setState({
+      updatedInfo: {
+        title: '',
+        description: ''
+      }
+    })
+    this.props.history.push('/details');
   }
 
   // The details page should have the buttons:

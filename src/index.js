@@ -36,7 +36,7 @@ function* getMovieSaga(action) {
 
 //Saga with axios PUT request to update the title and description
 function* updateMovieSaga(action) {
-    console.log('id coming in', action.payload.id);
+    console.log('id coming in', action.payload, action.payload.id);
     try {
         // get request that gets movies from database
         const response = yield axios.put(`/movies/${action.payload.id}`, action.payload)

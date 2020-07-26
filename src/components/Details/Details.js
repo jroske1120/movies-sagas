@@ -31,9 +31,12 @@ class Details extends Component {
                         src={this.props.reduxState.details.poster}
                         alt={this.props.reduxState.details.title}
                     />
-                    <p>
-                        Genres: {this.props.reduxState.details.genres.join(', ')}
-                    </p>
+                    {this.props.reduxState.details.genres === undefined ?
+                        <p></p>
+                        : <p>
+                            Genres: {this.props.reduxState.details.genres.join(', ')}
+                        </p>}
+
                     <p>
                         {this.props.reduxState.details.description}
                     </p>
