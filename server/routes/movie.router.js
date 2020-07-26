@@ -24,12 +24,13 @@ router.get('/', (req, res) => {
         });
 });
 
-router.put('/edit', (req, res) => {
+router.put('/:id', (req, res) => {
+    console.log(`in put request with req.body= ${req.body}`);
     // return all movies
     const queryText =
-        `UPDATE movies SET title = $1, description = $2;`
+        `UPDATE movies SET title = $2, description = $3 WHERE id = $1;`
         ;
-    pool.query(queryText)
+    pool.query(queryText, [req.body.id, req.body.title, req.body.description])
         .then((result) => {
             res.send(result.rows);
         })

@@ -6,6 +6,7 @@ class Edit extends Component {
 
   state = {
     updatedInfo: {
+      id: this.props.reduxState.details.id,
       title: '',
       description: ''
     }
@@ -27,6 +28,7 @@ class Edit extends Component {
   }
 
   handleSubmit = () => {
+    console.log(this.state)
     this.props.dispatch({
       type: "ADD_NEW_INFO",
       payload: this.state.updatedInfo
@@ -51,6 +53,7 @@ class Edit extends Component {
     return (
       <div className="App">
         <h1>Edit Page</h1>
+        {JSON.stringify(this.props.reduxState.details.id)}
         <button onClick={this.goBack}>Cancel (Goes back to Movie Details)</button>
         <form onSubmit={this.handleSubmit}>
           <input

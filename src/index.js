@@ -36,10 +36,11 @@ function* getMovieSaga(action) {
 
 //Saga with axios PUT request to update the title and description
 function* updateMovieSaga(action) {
+    console.log('id coming in', action.payload.id);
     try {
         // get request that gets movies from database
-        const response = yield axios.put('/edit')
-        yield put({ type: 'SET_DETAILS', payload: response.data })
+        const response = yield axios.put(`/movies/${action.payload.id}`, action.payload)
+        yield put({ type: 'GET_MOVIES', payload: response.data })
     } catch (error) {
         console.log('issue with movie get saga:', error)
     }
@@ -64,12 +65,22 @@ const details = (state = [], action) => {
     }
 }
 
+const update = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_NEW_INFO':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         details,
+        update
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
