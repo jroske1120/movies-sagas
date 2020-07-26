@@ -18,6 +18,7 @@ import axios from 'axios';
 function* rootSaga() {
     //click from getMovies in MovieList calls this
     yield takeEvery('GET_MOVIES', getMovieSaga)
+    yield takeEvery('ADD_NEW_INFO', updateMovieSaga)
 }
 
 // Create sagaMiddleware
@@ -29,10 +30,20 @@ function* getMovieSaga(action) {
         const response = yield axios.get('/movies')
         yield put({ type: 'SET_MOVIES', payload: response.data })
     } catch (error) {
-        console.log('issue with movie get saga:', error)
+        console.log('issue with movie PUT saga:', error)
     }
 }
 
+//Saga with axios PUT request to update the title and description
+function* updateMovieSaga(action) {
+    try {
+        // get request that gets movies from database
+        const response = yield axios.put('/edit')
+        yield put({ type: 'SET_DETAILS', payload: response.data })
+    } catch (error) {
+        console.log('issue with movie get saga:', error)
+    }
+}
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
