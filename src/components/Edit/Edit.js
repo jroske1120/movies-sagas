@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 class Edit extends Component {
 
-
+// local state = reduxState, whatever is left blank keeps old values
   state = {
     updatedInfo: {
       id: this.props.reduxState.details.id,
       title: this.props.reduxState.details.title,
-      description: this.props.reduxState.details.description
+      description: this.props.reduxState.details.description,
     }
   }
 
@@ -17,6 +17,7 @@ class Edit extends Component {
     this.props.history.push('/details');
   }
 
+  //handleChange currier to handle changes in inputs
   handleChange = (event, type) => {
     console.log(event.target.value)
     this.setState({
@@ -24,7 +25,6 @@ class Edit extends Component {
         ...this.state.updatedInfo,
         [type]: event.target.value
       }
-
     })
   }
 
@@ -33,12 +33,6 @@ class Edit extends Component {
     this.props.dispatch({
       type: "ADD_NEW_INFO",
       payload: this.state.updatedInfo
-    })
-    this.setState({
-      updatedInfo: {
-        title: '',
-        description: ''
-      }
     })
     this.props.history.push('/details');
   }

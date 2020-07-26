@@ -7,7 +7,7 @@ class MovieList extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div>
                 <h1>MovieList Page</h1>
                 {/* maps movies in database and 
                 passes down props to MovieItem */}
