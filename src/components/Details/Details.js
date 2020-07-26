@@ -43,6 +43,7 @@ class Details extends Component {
 
         return (
             <div>
+                <h1>Edit this Movie!</h1>
                 {/* Conditional rendering for if update reducer is undefined, display
                 what's in details reducer. This way when we return to details
                 after editing, our updates show instead of what's in details */}
@@ -55,6 +56,16 @@ class Details extends Component {
                             <Card variant="outlined"
                                 className={classes.card} >
                                 <CardActionArea>
+                                <Button
+                                        variant="contained"
+                                        onClick={this.goBackHome}>
+                                        Back to Movies
+                         </Button>
+                                    <Button
+                                        variant="contained"
+                                        onClick={this.goToEdit}>
+                                        Edit details
+                            </Button>
                                     <CardMedia
                                         className={classes.media}
                                         component="img"
@@ -75,14 +86,7 @@ class Details extends Component {
                                                 Genres: {this.props.reduxState.details.genres.join(', ')}
                                             </Typography>}
                                     </CardContent>
-                                    <button
-                                        onClick={this.goBackHome}>
-                                        Back to Movie List
-                         </button>
-                                    <button
-                                        onClick={this.goToEdit}>
-                                        Edit details
-                            </button>
+                                   
                                 </CardActionArea>
                             </Card>
                         </Grid>
@@ -95,6 +99,16 @@ class Details extends Component {
                             <Card variant="outlined"
                                 className={classes.card} >
                                 <CardActionArea>
+                                <Button
+                                        variant="contained"
+                                        onClick={this.goBackHome}>
+                                        Back to Movie List
+                         </Button>
+                                    <Button
+                                        variant="contained"
+                                        onClick={this.goToEdit}>
+                                        Edit details
+                            </Button>
                                     <CardMedia
                                         className={classes.media}
                                         component="img"
@@ -115,30 +129,22 @@ class Details extends Component {
                                                 Genres: {this.props.reduxState.details.genres.join(', ')}
                                             </Typography>}
                                     </CardContent>
-                                    <button
-                                        onClick={this.goBackHome}>
-                                        Back to Movie List
-                         </button>
-                                    <button
-                                        onClick={this.goToEdit}>
-                                        Edit details
-                            </button>
+                                    
                                 </CardActionArea>
                             </Card>
                         </Grid>
                     </div>
-
-
                 }
             </div>
         )
-            }}
+    }
+}
 
 
 
-        const mapReduxStateToProps = (reduxState) => ({
-            reduxState
-        });
+const mapReduxStateToProps = (reduxState) => ({
+    reduxState
+});
 
-        export default connect(mapReduxStateToProps)(withStyles(styles)(Details));
+export default connect(mapReduxStateToProps)(withStyles(styles)(Details));
 
