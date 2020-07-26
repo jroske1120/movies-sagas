@@ -53,7 +53,6 @@ class Edit extends Component {
     return (
       <div className="App">
         <h1>Edit Page</h1>
-        {JSON.stringify(this.props.reduxState.details.id)}
         <button onClick={this.goBack}>Cancel (Goes back to Movie Details)</button>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -66,6 +65,9 @@ class Edit extends Component {
             placeholder="New Description" /><br></br>
           <input type="submit" placeholder="Save" />
         </form>
+        <h1>{this.state.updatedInfo.title}</h1>
+        <img src={this.props.reduxState.details.poster}/>
+        <h2>{this.state.updatedInfo.description}</h2>
       </div>
     );
   }
